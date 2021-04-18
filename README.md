@@ -25,3 +25,4 @@ https://colab.research.google.com/drive/1pnsDghe_PSyNUhFQ-RMe0lV3duQTlKqp#scroll
 ![image](https://user-images.githubusercontent.com/36693355/112398480-a7a90b00-8d47-11eb-885f-5e529af5b1a2.png)
 
 ![image](https://user-images.githubusercontent.com/36693355/115141485-8f42bc80-a077-11eb-93d4-7555092e42d2.png)
+## 이거하다 Django REST Framework공부하러감

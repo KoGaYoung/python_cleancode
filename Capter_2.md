@@ -141,4 +141,7 @@ def backup():
 if __name__ == "__main__":
   with DataBaseHandle():
     backup()
+# stop Database
+# backup processing
+# start Database
 ~~~

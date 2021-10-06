@@ -59,8 +59,9 @@ product() 함수가 가변인자를 받고 있기 때문에 우리는 리스트�
 위의 슬라이스 기능은(ex.[:3] or .[slice(None,3)]) 매직매서드 덕분에 동작
 ### 매직매서드란? 
 파이썬이 내부적으로 이미 구현된(빌트인) 메소드, 기능에 따라 호출하여 사용 <br/>
-(ex. __init__, __doc__, __getitem, __len__)
-~~~ 매직매서드 정리 잘되있음
+~~~
+(ex. __init__,__doc__,__getitem__,__len__)
+매직매서드 정리 잘되있음
 https://zzsza.github.io/development/2020/07/05/python-magic-method/
 ~~~
 ### 시퀀스란? 
@@ -115,7 +116,7 @@ finally:
 with는 매직매서드 __enter__를 사용<br/>
 __enter__의 리턴값을 as에 할당, as는 없어도 무방<br/>
 with as 스코프(블록)내의 모든 명령어를 실행한 후에는 __exit__가 실행된다.<br/>
-__exit__는 __enter와 마찬가지로 with구문 안에 있다.<br/>
+__exit__는 __enter__와 마찬가지로 with구문 안에 있다.<br/>
 with의 구문이나 스코프(블록)내의 명령어를 수행하다 오류가 발생하면 __exit__를 실행한다.
 ~~~python
 '''

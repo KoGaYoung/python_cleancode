@@ -158,12 +158,12 @@ import contextlib
 # 매직매서드를 구현하지 않는다
 @contextlib.contextmanager
 def db_handler():
-  stopDB() 
+  stopDB() # 1
   yield ## 위에있으면 enter 아래에 있으면 exit
-  startDB()
+  startDB()# 3
  
  with db_handler():
-  backup()
+  backup() # 2
 ~~~
 ~~~python
 # 매직매서드를 구현하지만 with문이 없다, 믹스인클래스

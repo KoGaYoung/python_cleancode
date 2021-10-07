@@ -132,16 +132,19 @@ class DataBaseHandle:
   def __exit__(self, exc_type, ex_value, ex_traceback):
     self.startDB() # 실행3
 
-def stopDB():
-  print("stop Database")
-def startDB():
-  print("start Database")
+  def stopDB(self):
+    print("stop Database")
+  def startDB(self):
+    print("start Database")
+    
 def backup():
   print("backup processing") # 실행2
   
 if __name__ == "__main__":
   with DataBaseHandle():
     backup()
+    
+    
 # stop Database
 # backup processing
 # start Database
@@ -152,6 +155,7 @@ if __name__ == "__main__":
 ~~~python
 import contextlib
 
+# 매직매서드를 구현하지 않는다
 @contextlib.contextmanager
 def db_handler():
   stopDB() 
@@ -159,5 +163,20 @@ def db_handler():
   startDB()
  
  with db_handler():
-  db_backup()
+  backup()
 ~~~
+~~~python
+# 매직매서드를 구현하지만 with문이 없다, 믹스인클래스
+def db_handler(contextlib.ContextDecorator):  # 데코레이터 상속받음
+  def __enter__(self):
+    stopDB()
+   
+  def __exit(self):
+    startDB() # 3
+
+@db_handler   # 1
+def context_decorator():
+  backup().   # 2
+~~~
+필요한 기능만 추가하여 확장성 좋음, 캡슐화, 재사용성 좋음
+단점: 데코레이터로 함수를 호출하기 떄문에 __enter__, __exit__에서 리턴값을 필요로 할 경우 사용 불가

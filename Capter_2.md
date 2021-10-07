@@ -132,18 +132,32 @@ class DataBaseHandle:
   def __exit__(self, exc_type, ex_value, ex_traceback):
     self.startDB() # 실행3
 
-  def stopDB(self):
-    print("stop Database")
-  def startDB(self):
-    print("start Database")
-  
-
+def stopDB():
+  print("stop Database")
+def startDB():
+  print("start Database")
 def backup():
   print("backup processing") # 실행2
+  
 if __name__ == "__main__":
   with DataBaseHandle():
     backup()
 # stop Database
 # backup processing
 # start Database
+~~~
+## 2.5 컨택스트 관리자 구현
+항상 클래스로 매직매서드를 상속받아 구현해야 하는가? <b/>
+-> @contextlib.contextmanager 데코레이터를 사용하면 해결된다
+~~~python
+import contextlib
+
+@contextlib.contextmanager
+def db_handler():
+  stopDB() 
+  yield ## 위에있으면 enter 아래에 있으면 exit
+  startDB()
+ 
+ with db_handler():
+  db_backup()
 ~~~

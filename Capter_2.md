@@ -103,9 +103,6 @@ try:
   process_file(fd)
 finally:
   fd.close()
-  
- with open(filename) as fd:
-    process_file(fd)
 ~~~
 해당코드를 이렇게 수정할 수 있다. with 문에 함수를 추가하여 이후 동작을 진행할 수도 있다.
 ~~~python  

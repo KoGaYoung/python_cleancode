@@ -112,5 +112,53 @@ class Person:
 모든속성에 get,set(명령-분리원칙)을 활용하는 프로퍼티를 사용할 필요는 없다.<br/>
 속성값을 가져오거나 수정할 때 필요한 경우에만 사용하자
 
-# 2.8 이터러블 객체
-리스트,
+# 2.8 이터러블 객체이터러블:
+list, tuple, set, dict, string은 [for e in object:] 형태로 반복할 수 있는 객체<br/>
+이터러블 객체를 직접 만들 수 있다.
+~~~
+이터러블(iterable): __iter__ 매직 매서드를 구현한 객체
+이터레이터(iterator): __next__ 매직 매서드를 구현한 객체
+~~~
+~~~ python
+from datetime import timedelta
+# import datetime
+class DataRangeIterable:
+  '''자체 이터레이터 매서드를 가지고 있는 이터러블'''
+  def __init__(self, start_date, end_date):
+    self.start_date = start_date
+    self.end_date = end_date
+    self._present_date = start_date
+    
+
+  def __iter__(self):
+    '''이렇게 쓰면 .next()돌면서 한번밖에 못돌아서 그때마다 새로 객체생성 해줘야됨'''
+    return self
+  
+  # def __iter__(self):
+  #   '''이렇게 쓰면 __iter__를 호출할때마다 제너래이터를 생성한다.
+  #      이런 객체를 컨테이너 이터러블(container iterable)이라고함 '''
+  #   current_date = self.start_date
+  #   while current_date < self.end_date:
+  #     yield current_date
+  #     current_date += timedelta(days=1)
+    
+  def __next__(self):
+    if self._present_date >= self.end_date:
+      raise StopIteration
+    today = self._present_date
+    self._present_date += timedelta(days=1)
+    return today
+
+
+for day in DataRangeIterable(datetime.date(2019, 1 , 1), datetime.date(2019, 1, 5)):
+  print(day)
+## 2019-01-01
+## 2019-01-02
+## 2019-01-03
+## 2019-01-04
+
+rs1 = DataRangeIterable(datetime.date(2019, 1 , 1), datetime.date(2019, 1, 5))
+print(rs1)       # <__main__.DataRangeIterable object at 0x7f5c52ef21d0>
+print(max(rs1))  # 2019-01-04
+print(max(rs1))  # error
+~~~
